@@ -1,4 +1,3 @@
 streamlit
 requests
 toml
-pathlib  # 표준 라이브러리에 포함된 pathlib 모듈은 따로 설치할 필요가 없습니다.
