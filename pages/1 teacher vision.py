@@ -206,6 +206,7 @@ elif prompt_method == "인공지능 도움 받기":
                     
                     if response.choices and response.choices[0].message.content:
                         st.session_state.ai_prompt = response.choices[0].message.content.strip()
+                        st.session_state.final_prompt = st.session_state.ai_prompt  # 최종 프롬프트 업데이트
                     else:
                         st.error("⚠️ 프롬프트 생성에 실패했습니다. 다시 시도해 주세요.")
                         st.session_state.ai_prompt = ""
@@ -219,9 +220,6 @@ elif prompt_method == "인공지능 도움 받기":
         st.session_state.ai_prompt = st.text_area("✏️ 인공지능이 만든 프롬프트를 살펴보고 직접 수정하세요:", 
                                                   value=st.session_state.ai_prompt, height=300)
         st.session_state.final_prompt = st.session_state.ai_prompt
-
-# 최종 프롬프트를 세션 상태에 저장
-st.session_state.final_prompt = st.session_state.direct_prompt or st.session_state.ai_prompt
 
 # 활동 코드 입력
 if st.session_state.final_prompt:
@@ -252,6 +250,6 @@ if st.button("💾 프롬프트를 서버에 저장"):
     else:
         with st.spinner('💾 데이터를 저장하는 중입니다...'):
             if save_to_notion(activity_code, st.session_state.final_prompt, email, password):
-                st.success("🎉 프롬프트가 성공적으로 저장되었습니다.")
+                st.success(f"🎉 프롬프트가 성공적으로 저장되었습니다. **저장된 값:**\n\n**활동 코드:** {activity_code}\n**프롬프트:** {st.session_state.final_prompt}")
             else:
                 st.error("❌ 프롬프트 저장 중 오류가 발생했습니다.")
