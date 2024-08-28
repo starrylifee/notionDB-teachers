@@ -239,7 +239,7 @@ if st.session_state.final_prompt:
     email = st.text_input("📧 Email (선택사항) 학생의 생성결과물을 받아볼 수 있습니다.", value=st.session_state.get('email', '')).strip()
     password = st.text_input("🔒 Password (선택사항) 저장한 프롬프트를 조회, 삭제할 수 있습니다.", value=st.session_state.get('password', ''), type="password").strip()
 
-    st.markdown("**[https://students.streamlit.app/](https://students.streamlit.app/)** 에서 학생들이 이 활동 코드를 입력하면 해당 프롬프트를 불러올 수 있습니다.")
+    st.markdown("**[https://students-ai.streamlit.app/](https://students-ai.streamlit.app/)** 에서 학생들이 이 활동 코드를 입력하면 해당 프롬프트를 불러올 수 있습니다.")
 
 # 서버 저장 버튼은 항상 표시되며, 입력 검증 후 동작
 if st.button("💾 프롬프트를 서버에 저장"):
