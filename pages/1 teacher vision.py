@@ -250,6 +250,11 @@ if st.button("💾 프롬프트를 서버에 저장"):
     else:
         with st.spinner('💾 데이터를 저장하는 중입니다...'):
             if save_to_notion(activity_code, st.session_state.final_prompt, email, password):
-                st.success(f"🎉 프롬프트가 성공적으로 저장되었습니다. **저장된 값:**\n\n**활동 코드:** {activity_code}\n**프롬프트:** {st.session_state.final_prompt}")
+                st.success(f"🎉 프롬프트가 성공적으로 저장되었습니다. **저장된 값:**\n\n"
+                        f"**활동 코드:** {activity_code}\n"
+                        f"**프롬프트:** {st.session_state.final_prompt}\n"
+                        f"**이메일:** {email}\n"
+                        f"**비밀번호:** {'[입력됨]' if password else '[입력되지 않음]'}")
             else:
                 st.error("❌ 프롬프트 저장 중 오류가 발생했습니다.")
+
