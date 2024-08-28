@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # Streamlit의 배경색 변경
-background_color = "#F0E68C"
+background_color = "#E0FFFF"
 
 # 배경색 변경을 위한 CSS
 page_bg_css = f"""
