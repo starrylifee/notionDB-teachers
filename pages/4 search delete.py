@@ -92,11 +92,11 @@ def delete_prompt_by_activity_code(activity_code):
                     archive_data = {"archived": True}
                     delete_response = requests.patch(f"{NOTION_PAGE_URL}/{page_id}", headers=headers, json=archive_data)
                     if delete_response.status_code == 200:
-                        st.success(f"🎉 활동 코드 '{activity_code}'에 해당하는 프롬프트가 성공적으로 보관 처리되었습니다.")
+                        st.success(f"🎉 활동 코드 '{activity_code}'에 해당하는 프롬프트가 성공적으로 삭제 처리되었습니다.")
                     else:
-                        st.error(f"❌ 활동 코드 '{activity_code}'에 해당하는 프롬프트 보관 중 오류가 발생했습니다. 상태 코드: {delete_response.status_code} - {delete_response.text}")
+                        st.error(f"❌ 활동 코드 '{activity_code}'에 해당하는 프롬프트 삭제 중 오류가 발생했습니다. 상태 코드: {delete_response.status_code} - {delete_response.text}")
                 except Exception as e:
-                    st.error(f"❌ 활동 코드 '{activity_code}'에 해당하는 프롬프트 보관 중 예외가 발생했습니다: {str(e)}")
+                    st.error(f"❌ 활동 코드 '{activity_code}'에 해당하는 프롬프트 삭제 중 예외가 발생했습니다: {str(e)}")
         else:
             st.warning("⚠️ 해당 활동 코드에 대한 프롬프트를 찾을 수 없습니다.")
     else:

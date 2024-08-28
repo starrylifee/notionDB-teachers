@@ -11,7 +11,6 @@ st.set_page_config(
     page_icon="🧑‍🏫",  # 브라우저 탭에 표시될 아이콘 (이모지 또는 이미지 파일 경로)
 )
 
-
 # Streamlit의 기본 메뉴와 푸터 숨기기
 hide_menu_style = """
     <style>
@@ -29,7 +28,6 @@ secrets_path = pathlib.Path(__file__).parent.parent / ".streamlit/secrets.toml"
 try:
     with open(secrets_path, "r") as f:
         secrets = toml.load(f)
-    st.write("🔍 secrets.toml 파일이 성공적으로 로드되었습니다.")
 except Exception as e:
     st.error(f"❌ secrets.toml 파일을 로드하는 중 오류가 발생했습니다: {e}")
     st.stop()
@@ -37,7 +35,6 @@ except Exception as e:
 # OpenAI API 클라이언트 초기화
 try:
     client = OpenAI(api_key=secrets["api"]["keys"][0])
-    st.write("🔌 OpenAI 클라이언트가 성공적으로 초기화되었습니다.")
 except Exception as e:
     st.error(f"❌ OpenAI 클라이언트 초기화 중 오류가 발생했습니다: {e}")
     st.stop()
@@ -65,7 +62,6 @@ def is_activity_code_duplicate(activity_code):
     }
     try:
         response = requests.post(url, headers=headers, json=data)
-        st.write(f"🔍 Notion API 응답 코드: {response.status_code}")
         if response.status_code == 200:
             results = response.json().get("results")
             return len(results) > 0
@@ -107,12 +103,8 @@ def save_to_notion(activity_code, final_prompt, email, password):
         }
     }
 
-    st.write(f"📦 전송 데이터: {data}")  # 전송할 데이터 구조를 출력하여 확인
-
     try:
         response = requests.post(NOTION_API_URL, headers=headers, json=data)
-        st.write(f"🔍 Notion 데이터 저장 응답 코드: {response.status_code}")
-        st.write(f"🔍 응답 내용: {response.text}")  # Notion API 응답 본문을 출력하여 문제를 파악
         return response.status_code == 200
     except Exception as e:
         st.error(f"❌ Notion 데이터 저장 중 오류가 발생했습니다: {e}")
@@ -154,7 +146,6 @@ if prompt_method == "샘플 프롬프트 이용하기":
     selected_sample = st.selectbox("샘플 프롬프트를 선택하세요:", ["선택하세요"] + list(sample_prompts.keys()))
 
     if selected_sample != "선택하세요":
-        st.info(f"선택된 프롬프트: {sample_prompts[selected_sample]}")
         st.session_state.direct_prompt = st.text_area("✏️ 샘플 프롬프트 수정 가능:", value=sample_prompts[selected_sample], height=300)
         st.session_state.final_prompt = st.session_state.direct_prompt
 
