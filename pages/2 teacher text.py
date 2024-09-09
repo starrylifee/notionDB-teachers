@@ -232,11 +232,11 @@ elif prompt_method == "인공지능 도움 받기":
                 except Exception as e:
                     st.error(f"⚠️ 프롬프트 생성 중 오류가 발생했습니다: {e}")
 
-        # 인공지능 프롬프트가 생성된 경우에만 표시
-        if st.session_state.ai_prompt:
-            st.session_state.ai_prompt = st.text_area("✏️ 인공지능이 만든 프롬프트를 살펴보고 직접 수정하세요:", 
-                                                      value=st.session_state.ai_prompt, height=300)
-            st.session_state.final_prompt = st.session_state.ai_prompt
+    # 인공지능 프롬프트가 생성된 경우에만 표시
+    if st.session_state.ai_prompt:
+        st.session_state.ai_prompt = st.text_area("✏️ 인공지능이 만든 프롬프트를 살펴보고 직접 수정하세요:", 
+                                                    value=st.session_state.ai_prompt, height=300)
+        st.session_state.final_prompt = st.session_state.ai_prompt
 
 # 활동 코드 입력
 if st.session_state.final_prompt:
